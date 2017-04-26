@@ -6,7 +6,7 @@
 
 //Anda bien asi como esta las greeks tambien chequeado con modelo android
 package Option2017Interface;
-
+//import funcionesexportables.deDistribucion.;
 
 
 /**
@@ -14,16 +14,33 @@ package Option2017Interface;
  * @author Paulino
  */
 public class BlackScholesModel extends AbstractOptionClass2017 implements DerivativesCalc{
-    //tipoEjercicio='E';
     
-
     protected double q,z,ww,d1,d2,CNDFd1,CNDFd2,PDFd1,CNDF_d1,CNDF_d2;
-    
+        
     //Constructors
+    protected BlackScholesModel(){};
+    public BlackScholesModel(Underlying und, char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue){
+        pModelName                      ="Black-Scholes ver2017";
+        modelNumber                     =1;
+        tipoEjercicio                   ='E';
+        tipoContrato                    =und.tipoContrato;
+        underlyingValue                 =und.underlyingValue;
+        underlyingHistVolatility        =und.underlyingHistVolatility;
+        dividendRate                    =und.dividendRate;
+        this.callPut                    =callPut;
+        this.strike                     =strike;
+        this.daysToExpiration           =daysToExpiration;
+        this.tasa                       =tasa;
+        this.impliedVol                 =impliedVol;
+        this.optionMktValue             =optionMktValue;
+        //System.out.println("Inside Black and Scholes Constructor #2,todos los parametros");
+       
+        build();
+    }
     public BlackScholesModel(OptionParameters opt){
-        pModelName                  ="Black-Scholes ver2016";
-        modelNumber                 =1;
-        tipoEjercicio               ='E';
+        pModelName                      ="Black-Scholes ver2017";
+        modelNumber                     =1;
+        tipoEjercicio                   ='E';
         tipoContrato               =opt.tipoContrato;
         underlyingValue            =opt.underlyingValue;
         underlyingHistVolatility   =opt.underlyingHistVolatility;
@@ -37,12 +54,12 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
         
         build();
     //System.out.println("Inside Black and Scholes Constructor #1 un solo parametro");    
-    //System.out.println("Hist Volatility:"+ underlyingHistVolatility);
+    
     }
     public BlackScholesModel(char tipoContrato, double underlyingValue,double underlyingHistVolatility,double dividendRate,char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue){
-        pModelName                  ="Black-Scholes ver2016";
-        modelNumber                 =1;
-        tipoEjercicio               ='E';
+        pModelName                      ="Black-Scholes ver2017";
+        modelNumber                     =1;
+        tipoEjercicio                   ='E';
         this.tipoContrato               =tipoContrato;
         this.underlyingValue            =underlyingValue;
         this.underlyingHistVolatility   =underlyingHistVolatility;
@@ -54,9 +71,9 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
         this.impliedVol                 =impliedVol;
         this.optionMktValue             =optionMktValue;
         //System.out.println("Inside Black and Scholes Constructor #2,todos los parametros");
-        //System.out.println("Und value +2.1="+(underlyingValue+2.1));
+       
         build();
-        //impliedVlt() debe ir aca esta instruccion en cada constructor?
+       
     }
     
     @Override public void runModel(){
