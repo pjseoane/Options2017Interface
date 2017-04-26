@@ -35,7 +35,7 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
         this.optionMktValue             =optionMktValue;
         //System.out.println("Inside Black and Scholes Constructor #2,todos los parametros");
        
-        build();
+        buildBS();
     }
     public BlackScholesModel(OptionParameters opt){
         pModelName                      ="Black-Scholes ver2017";
@@ -52,7 +52,7 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
         impliedVol                 =opt.impliedVol;
         optionMktValue             =opt.optionMktValue;
         
-        build();
+        buildBS();
     //System.out.println("Inside Black and Scholes Constructor #1 un solo parametro");    
     
     }
@@ -72,15 +72,18 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
         this.optionMktValue             =optionMktValue;
         //System.out.println("Inside Black and Scholes Constructor #2,todos los parametros");
        
-        build();
+        buildBS();
        
     }
     
+    private void buildBS(){
+        build();
+    }
+    
     @Override public void runModel(){
-        
-       //Estas variables son heredadas dayYear,sqrDayYear,
-       //dayYear = daysToExpiration / 365;
-       //sqrDayYear = Math.sqrt(dayYear);
+      //heredadas:  
+      // dayYear=daysToExpiration/365;
+      // sqrDayYear = Math.sqrt(dayYear);
       
        q=(tipoContrato==STOCK) ? dividendRate:tasa; 
        //q: si es una accion q es el dividendo, si es un futuro q se toma la tasa para descontar el valor futr a presente 
