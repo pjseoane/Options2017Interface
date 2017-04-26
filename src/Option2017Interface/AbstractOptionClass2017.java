@@ -78,7 +78,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
         modelCounter++;
         startTime=System.currentTimeMillis();
         multCallPut=(callPut==CALL)?1:-1;
-        tieneVida=(daysToExpiration>0)?true:false;
+        tieneVida=(daysToExpiration>0);
         
         if (tieneVida){
             opcionTieneVida();
@@ -103,7 +103,8 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
  }
  
     //otros methods: getters
-    //public double getMktPrice(){return MktPrime;}
+    
+    //Getters Opcion
     public double getPrima(){return prima;}
     public double getDelta(){return delta;}
     public double getGamma(){return gamma;}
@@ -111,20 +112,13 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     public double getTheta(){return theta;}
     public double getRho()  {return rho;}
     public double getImpVlt(){return impliedVol;}
-   
-    public double getModelNumber(){return modelNumber;}
-    public String getModelName(){return pModelName;}
-    public double getElapsedTime(){return elapsedTime;}
     public double getOptionMktValue(){return optionMktValue;}
-    public double getUnderlyingHistVlt(){return underlyingHistVolatility;}
-    
     public char getTipoEjercicio(){return tipoEjercicio;}
     public char getCallPut(){return callPut;}
     public double getStrike(){return strike;}
     public double getDaysToExpiration(){return daysToExpiration;}
-    public double getTasa(){return tasa;}
     public double getImpliedVlt(){return impliedVol;}
-    //public double getOptionVlt(){return impliedVol;} //Esta es la vlt implicita en la opcion, no la del stock
+    public double getTasa(){return tasa;}
     public double getValueToFind(int i){
      
         if (i>9){i=0;}
@@ -133,7 +127,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     public double[][] getDerivativesArray(){
        
         return DerivativesArray;}
-    public String getString(){
+    public String getOptionString(){
     StringBuilder builder =new StringBuilder();
     builder.append(modelNumber);
     builder.append("-");
@@ -151,10 +145,17 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     builder.append("rho");
     builder.append(rho);
     builder.append("impVlt");
-    builder.append(DerivativesArray[0][6]);
+    builder.append(impliedVol);
     builder.append("z");
     return builder.toString();
     }//end getString
+    
+    //getters model
+    public double getModelNumber(){return modelNumber;}
+    public String getModelName(){return pModelName;}
+    public double getElapsedTime(){return elapsedTime;}
+    
+    
     
     //setters
     void setTipoEjercicio(char tipoEjercicio){this.tipoEjercicio=tipoEjercicio;}
