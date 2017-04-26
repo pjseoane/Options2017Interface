@@ -38,16 +38,28 @@ public class Underlying {
         this.underlyingHistVolatility   =underlyingHistVolatility;
         this.dividendRate               =dividendRate;
     }
-    protected char getTipoContrato(){return tipoContrato;}
-    protected double getUnderlyingValue(){return underlyingValue;}
-    protected double getUnderLyingHistVolatility(){return underlyingHistVolatility;}
-    protected double getDividendRate(){return dividendRate;}
+    public char getTipoContrato(){return tipoContrato;}
+    public double getUnderlyingValue(){return underlyingValue;}
+    public double getUnderlyingHistVlt(){return underlyingHistVolatility;}
+    public double getDividendRate(){return dividendRate;}
     //setters
-    protected void setTipoContrato(char TipoContrato){this.tipoContrato=TipoContrato;}
-    protected void setUnderlyingValue(double UnderlyingValue){underlyingValue=UnderlyingValue;}
-    protected void setUnderlyingHistVolatility(double Volatility){underlyingHistVolatility=Volatility;}
-    protected void setDividendRate(double DividendRate){this.dividendRate=DividendRate;}
+    public void setTipoContrato(char TipoContrato){this.tipoContrato=TipoContrato;}
+    public void setUnderlyingValue(double UnderlyingValue){underlyingValue=UnderlyingValue;}
+    public void setUnderlyingHistVlt(double Volatility){underlyingHistVolatility=Volatility;}
+    public void setDividendRate(double DividendRate){this.dividendRate=DividendRate;}
     //getters
     
-    
+    public String getUnderlyingString(){
+    StringBuilder builder =new StringBuilder();
+    builder.append("Tipo Contrato ");
+    builder.append(tipoContrato);
+    builder.append(" Value: ");
+    builder.append(underlyingValue);
+    builder.append(" Historical Vlt: ");
+    builder.append(underlyingHistVolatility);
+    builder.append(" Dividend Rate: ");
+    builder.append(dividendRate);
+    builder.append("-");
+    return builder.toString();
+    }
 }
