@@ -38,35 +38,41 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     protected double prima=-2,delta=-2,gamma=-2,vega=-2,theta=-2,rho=-2,impliedVol,optionMktValue=0; 
     protected double dayYear,sqrDayYear;
     
-    protected double underlyingValueNPV;
+    protected double underlyingNPV;
     protected long startTime,elapsedTime;
     
     //protected int multiplicador;
     protected int multCallPut;
-    private boolean tieneVida;
+   
+    
+    
+    public void build(){
+        modelCounter++;
+        startTime=System.currentTimeMillis();
+        multCallPut=(callPut==CALL)?1:-1;
+        //tieneVida=(daysToExpiration>0);
         
-    //AbstractOptionClass2017(){}
-      
-        
+        if (daysToExpiration>0){
+            dayYear=daysToExpiration/365;
+            sqrDayYear = Math.sqrt(dayYear);
+            underlyingNPV=underlyingValue*Math.exp(-dividendRate*dayYear);          
+            runModel(); 
+                //A continuacion se recalcula la opcion si esta vieen con un valor de mercado 
+                //si el valor de mercado es cero se calcula con la vlt historica, sino se calcula 
+                //la implicita y queda recalculada toda la opcion y sus greeks.
+            impliedVlt();
+            
+        }else{
+            opcionSinVida();
+        }
+         
+         fillDerivativesArray();
+         elapsedTime = System.currentTimeMillis() - startTime;
+    }
     //overridable method:   
     @Override
     abstract public void runModel(); //Cada modelo implementa runModel()
-    
-    private void opcionTieneVida(){
-        //Si hay vida se cacula el modelo
-        dayYear=daysToExpiration/365;
-        sqrDayYear = Math.sqrt(dayYear);
-        underlyingValueNPV=underlyingValue*Math.exp(-dividendRate*dayYear);
-        //do some works with price for dividends, stock or futures or leave it to each model?
-        
-        runModel(); //Aca se llama a la implementacion de cada modelo
-        
-        //A continuacion se recalcula la opcion si esta vieen con un valor de mercado 
-        //si el valor de mercado es cero se calcula con la vlt historica, sino se calcula 
-        //la implicita y queda recalculada toda la opcion y sus greeks.
-        impliedVlt(); 
-    }
-    private void opcionSinVida(){
+    protected void opcionSinVida(){
         delta=multCallPut;  
         gamma=vega=theta=rho=0;
         prima = Math.max((underlyingValue - strike)*multCallPut, 0);
@@ -74,21 +80,6 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
        
     }
     
-    public void build(){
-        modelCounter++;
-        startTime=System.currentTimeMillis();
-        multCallPut=(callPut==CALL)?1:-1;
-        tieneVida=(daysToExpiration>0);
-        
-        if (tieneVida){
-            opcionTieneVida();
-        }else{
-            opcionSinVida();
-        }
-         elapsedTime = System.currentTimeMillis() - startTime;
-         fillDerivativesArray();
-    }
- 
     protected void fillDerivativesArray(){
         DerivativesArray[0][0]=prima;
         DerivativesArray[0][1]=delta;
@@ -164,79 +155,6 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     void setOptionVlt(double vlt){this.impliedVol=vlt;}
    
     
-    /*public double ImpliedVolatility(double MktPrime){
-    /*Anda ok el tema es que deja seteada a la opcion con la imp vlt y todos los valores
-    actualizados a nueva Vlt implicita.
-        No estoy seguro si esto es util o no, puede que se quiera o no.
-        Si se quiere solo calcular la Imp Vlt y dejar la opcion como viene eontonces hay que construir 
-        otra opcion una copia real y trabajar sobre esta copia.
-        Este metodo es lineal, no recursivo.
-        Recursivo esta hecho mas abajo.
-        No es Biseccion, es mejor, utiliza el vega o sea la derivada.
-        Llega a la solucion mucho mas rapido, entre 3 y 5 iteraciones.
-        Este metodo tiene un corte en 20 iteraciones antes que se vaya a la mierda.
-        Este metodo permite devolver el contador de iteraciones para debug-
-        El recursivo no
-            
-        int Contador=0;
-        double dif;
-        double Accuracy=0.00001;
-        dif=MktPrime-getPrima();      
-        double newVlt=getOptionVlt();
-        
-         while(Math.abs(dif) > Accuracy && Contador <20 && getVega()>0.000001 && MktPrime>0 && newVlt>0.005){
-         newVlt+=(dif/getVega()/100);
-            
-                //Asignamos la nueva vlt calculada a la opcion en cuestion y la recalculamos
-                //Utiliza el modelo correspondiente a esa opcion
-                setOptionVlt(newVlt);
-                this.RunModel();
-                dif=MktPrime-getPrima();
-                Contador++;
-         }
-        
-        //return Contador++;
-        // newVlt=Contador;
-        // fillDerivativesArray();
-        return newVlt;
-    }*/
-    /*public double IVRecursive(double MktPrime){
-        //Este algoritmo esta hecho en forma recursiva.
-        //No se puede llevar un contador de las iteraciones para hacer debug.
-        //Habria que poner un contador de tipo publico, pero no justifica. 
-        
-        double dif;
-        double Accuracy=0.000001;
-        int contador=0;
-        dif=MktPrime-getPrima();
-        double newVlt=getOptionVlt();
-                
-        if (Math.abs(dif)>Accuracy && MktPrime >0 && getVega()>0.000001){
-            setOptionVlt(newVlt+=(dif/getVega()/100));
-            RunModel();
-                       
-           return IVRecursive(MktPrime);
-        }
-        fillDerivativesArray();
-        return newVlt;
-        
-    }*/
-    /*public double IVRecursive(double MktPrime,double Accuracy){
-        //Este algoritmo esta hecho en forma recursiva y acepta Accuracy como parametro
-        double dif;
-        if (Accuracy<0.0000000001){Accuracy=0.0000000001;}
-        
-        dif=MktPrime-getPrima();
-        double newVlt=getOptionVlt();
-                
-        if (Math.abs(dif)>Accuracy && MktPrime >0&& getVega()>0.000001){
-            setOptionVlt(newVlt+=(dif/getVega()/100));
-            RunModel(); // construye la nueva opcion con la nueva vlt
-            
-            return IVRecursive(MktPrime,Accuracy);
-        }
-    return newVlt;
-    }*/
     public void impliedVlt(){
         
     /*Anda ok el tema es que deja seteada a la opcion con la imp vlt y todos los valores
