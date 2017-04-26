@@ -32,7 +32,7 @@ public class Whaley2017 extends BlackScholesModel{
         this.optionMktValue             =optionMktValue;
         //System.out.println("Inside Whaley 2017 Constructor #2,todos los parametros");
        
-        build();
+        buildW();
        
     }
     public Whaley2017(Underlying Und,char callPut,double strike,double daysToExpiration,double tasa,double mktPrime){
@@ -50,21 +50,22 @@ public class Whaley2017 extends BlackScholesModel{
         this.tasa               =tasa;
         this.optionMktValue     =mktPrime;
         this.anUnderlying       =Und;
-        build();
+        buildW();
         }
-    
+   
+    private void buildW(){
+        build();
+    }
     @Override
     public void runModel(){
         
-        //parameters  = new OptionParameters(anUnderlying,'C',strike,daysToExpiration,tasa,impliedVol,optionMktValue);
         BlackScholesModel BSOption=new BlackScholesModel(tipoContrato, underlyingValue,underlyingHistVolatility, dividendRate, callPut, strike, daysToExpiration, tasa, impliedVol, optionMktValue);
        
         switch (callPut){
             
             case CALL:
 		prima=(tipoContrato=='S')? BSOption.getPrima():wWhaley();
-                
-		break;
+                break;
 
             case PUT:
 		prima = wWhaley();
@@ -83,7 +84,9 @@ public class Whaley2017 extends BlackScholesModel{
     
     private double wWhaley(){
        
-       
+       //heredadas
+       //dayYear=daysToExpiration/365;
+       //sqrDayYear = Math.sqrt(dayYear);
               
        q=(tipoContrato==STOCK) ? dividendRate:tasa; 
        //q: si es una accion q es el dividendo, si es un futuro q se toma la tasa para descontar el valor futr a presente 
