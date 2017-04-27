@@ -11,7 +11,7 @@ package Option2017Interface;
  */
 public class Whaley2017 extends BlackScholesModel{
      private double zz, vlt2,VltSqrDayYear,h,alfa,beta,lambda,eex,s1,zerror,xx,corr,mBlackScholes,rhs,lhs,nd1,slope,a,vv;
-     private Underlying anUnderlying;
+     
      //private OptionParameters parameters;
 
      
