@@ -15,7 +15,7 @@ package Option2017Interface;
  */
 public class BlackScholesModel extends AbstractOptionClass2017 implements DerivativesCalc{
     
-    protected double q,z,ww,d1,d2,CNDFd1,CNDFd2,PDFd1,CNDF_d1,CNDF_d2;
+    protected double z,ww,d1,d2,CNDFd1,CNDFd2,PDFd1,CNDF_d1,CNDF_d2;
         
     //Constructors
     protected BlackScholesModel(){};
@@ -77,7 +77,7 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
     }
     
     private void buildBS(){
-        build();
+        build();  //build esta definida en AbstractOptionClass para no tener un override en el constructor
     }
     
     @Override public void runModel(){
@@ -129,7 +129,12 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
                 break;
                 
         }//end switch
-    }
+    }//end runModel()
+    
+    
+   
+    
+    
 }//end BlackScholesModel
    
 
