@@ -11,9 +11,8 @@ package Option2017Interface;
  */
 public interface DerivativesCalc {
     
-    
     void runModel();
-    /*
+    void CalcImpliedVlt();
     void fillDerivativesArray();
     String getModelName();
     double getPrima();
@@ -23,5 +22,5 @@ public interface DerivativesCalc {
     double getTheta();
     double getRho();
     double getImpliedVlt();
-*/
+
 }
