@@ -32,9 +32,10 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     
     protected char tipoEjercicio;
     protected char callPut;
-        
+    protected Underlying anUnderlying;
+    
    //protected double optionVlt;
-    protected double strike,daysToExpiration, tasa;//optionMktValue,q;
+    protected double q,strike,daysToExpiration, tasa;//optionMktValue,q;
     protected double prima=-2,delta=-2,gamma=-2,vega=-2,theta=-2,rho=-2,impliedVol,optionMktValue=0; 
     protected double dayYear,sqrDayYear;
     
@@ -44,7 +45,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     //protected int multiplicador;
     protected int multCallPut;
    
-    
+    //public AbstractOptionClass2017(){};
     
     public void build(){
         modelCounter++;
@@ -60,7 +61,8 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
                 //A continuacion se recalcula la opcion si esta vieen con un valor de mercado 
                 //si el valor de mercado es cero se calcula con la vlt historica, sino se calcula 
                 //la implicita y queda recalculada toda la opcion y sus greeks.
-            impliedVlt();
+            CalcImpliedVlt();
+           
             
         }else{
             opcionSinVida();
@@ -72,6 +74,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     //overridable method:   
     @Override
     abstract public void runModel(); //Cada modelo implementa runModel()
+    
     protected void opcionSinVida(){
         delta=multCallPut;  
         gamma=vega=theta=rho=0;
@@ -80,7 +83,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
        
     }
     
-    protected void fillDerivativesArray(){
+    public void fillDerivativesArray(){
         DerivativesArray[0][0]=prima;
         DerivativesArray[0][1]=delta;
         DerivativesArray[0][2]=gamma;
@@ -155,7 +158,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     void setOptionVlt(double vlt){this.impliedVol=vlt;}
    
     
-    public void impliedVlt(){
+    public void CalcImpliedVlt(){
         
     /*Anda ok el tema es que deja seteada a la opcion con la imp vlt y todos los valores
     actualizados a nueva Vlt implicita.
@@ -175,9 +178,9 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
         double Accuracy=0.000001;
         dif=optionMktValue-prima;      
         
-        double newVlt=impliedVol;
+        //double newVlt=impliedVol;
         
-         while(Math.abs(dif) > Accuracy && contador <20 && vega>0.000001 && optionMktValue>0 && newVlt>0.005){
+         while(Math.abs(dif) > Accuracy && contador <20 && vega>0.000001 && optionMktValue>0 && impliedVol>0.005){
          //newVlt+=(dif/vega/100);
             
                 //Asignamos la nueva vlt calculada a la opcion en cuestion y la recalculamos
