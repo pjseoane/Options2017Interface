@@ -54,9 +54,14 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
         //tieneVida=(daysToExpiration>0);
         
         if (daysToExpiration>0){
-            dayYear=daysToExpiration/365;
-            sqrDayYear = Math.sqrt(dayYear);
-            underlyingNPV=underlyingValue*Math.exp(-dividendRate*dayYear);          
+           dayYear=daysToExpiration/365;
+           sqrDayYear = Math.sqrt(dayYear);
+           
+           if(tipoContrato==STOCK){
+            underlyingNPV=underlyingValue*Math.exp(-dividendRate*dayYear);
+           }else{
+             underlyingNPV=underlyingValue  ;
+           }
             runModel(); 
                 //A continuacion se recalcula la opcion si esta vieen con un valor de mercado 
                 //si el valor de mercado es cero se calcula con la vlt historica, sino se calcula 
@@ -68,8 +73,8 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
             opcionSinVida();
         }
          
-         fillDerivativesArray();
          elapsedTime = System.currentTimeMillis() - startTime;
+         fillDerivativesArray();
     }
     //overridable method:   
     @Override
@@ -160,8 +165,8 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     
     public void CalcImpliedVlt(){
         
-    /*Anda ok el tema es que deja seteada a la opcion con la imp vlt y todos los valores
-    actualizados a nueva Vlt implicita.
+        /*Anda ok el tema es que deja seteada a la opcion con la imp vlt y todos los valores
+        actualizados a nueva Vlt implicita.
         No estoy seguro si esto es util o no, puede que se quiera o no.
         Si se quiere solo calcular la Imp Vlt y dejar la opcion como viene eontonces hay que construir 
         otra opcion una copia real y trabajar sobre esta copia.
@@ -178,10 +183,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
         double Accuracy=0.000001;
         dif=optionMktValue-prima;      
         
-        //double newVlt=impliedVol;
-        
-         while(Math.abs(dif) > Accuracy && contador <20 && vega>0.000001 && optionMktValue>0 && impliedVol>0.005){
-         //newVlt+=(dif/vega/100);
+        while(Math.abs(dif) > Accuracy && contador <20 && vega>0.000001 && optionMktValue>0 && impliedVol>0.005){
             
                 //Asignamos la nueva vlt calculada a la opcion en cuestion y la recalculamos
                 //Utiliza el modelo correspondiente a esa opcion
@@ -190,7 +192,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
                 runModel();
                 dif=optionMktValue-prima;
                 contador++;
-         }
+        }
     }
     
 }//end class

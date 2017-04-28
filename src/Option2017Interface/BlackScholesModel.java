@@ -20,9 +20,7 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
     //Constructors
     protected BlackScholesModel(){};
     public BlackScholesModel(Underlying und, char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue){
-        pModelName                      ="Black-Scholes ver2017";
-        modelNumber                     =1;
-        tipoEjercicio                   ='E';
+       
         tipoContrato                    =und.tipoContrato;
         underlyingValue                 =und.underlyingValue;
         underlyingHistVolatility        =und.underlyingHistVolatility;
@@ -38,9 +36,7 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
         buildBS();
     }
     public BlackScholesModel(OptionParameters opt){
-        pModelName                      ="Black-Scholes ver2017";
-        modelNumber                     =1;
-        tipoEjercicio                   ='E';
+        
         tipoContrato               =opt.tipoContrato;
         underlyingValue            =opt.underlyingValue;
         underlyingHistVolatility   =opt.underlyingHistVolatility;
@@ -57,9 +53,7 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
     
     }
     public BlackScholesModel(char tipoContrato, double underlyingValue,double underlyingHistVolatility,double dividendRate,char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue){
-        pModelName                      ="Black-Scholes ver2017";
-        modelNumber                     =1;
-        tipoEjercicio                   ='E';
+       
         this.tipoContrato               =tipoContrato;
         this.underlyingValue            =underlyingValue;
         this.underlyingHistVolatility   =underlyingHistVolatility;
@@ -77,6 +71,10 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
     }
     
     private void buildBS(){
+        pModelName                      ="Black-Scholes ver2017";
+        modelNumber                     =1;
+        tipoEjercicio                   ='E';
+        
         build();  //build esta definida en AbstractOptionClass para no tener un override en el constructor
     }
     
@@ -84,6 +82,8 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
       //heredadas:  
       // dayYear=daysToExpiration/365;
       // sqrDayYear = Math.sqrt(dayYear);
+       dayYear=daysToExpiration/365;
+            sqrDayYear = Math.sqrt(dayYear);
       
        q=(tipoContrato==STOCK) ? dividendRate:tasa; 
        //q: si es una accion q es el dividendo, si es un futuro q se toma la tasa para descontar el valor futr a presente 

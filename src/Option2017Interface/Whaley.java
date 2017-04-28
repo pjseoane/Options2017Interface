@@ -10,18 +10,15 @@ package Option2017Interface;
  * @author paulino.seoane
  */
 public class Whaley extends BlackScholesModel implements DerivativesCalc{
-     private double zz,b,vlt2,VltSqrDayYear,h,alfa,beta,lambda,eex,s1,zerror,xx,corr,mBlackScholes,rhs,lhs,nd1,slope,a,vv;
+     private double b,vlt2,VltSqrDayYear,h,alfa,beta,lambda,eex,s1,zerror,xx,corr,mBlackScholes,rhs,lhs,nd1,slope,a,vv;
  
     Whaley(){}
     public Whaley(Underlying Und,char callPut,double strike,double daysToExpiration,double tasa,double mktPrime){
                 
-        this.pModelName         ="Whaley ver2017 v2";
-        this.modelNumber        =2;
-        this.tipoEjercicio      ='A';
-        this.tipoContrato       =Und.getTipoContrato();
-        this.underlyingValue    =Und.getUnderlyingValue();
-        this.dividendRate       =Und.getDividendRate();
-        this.impliedVol         =Und.getUnderlyingHistVlt();
+        tipoContrato            =Und.getTipoContrato();
+        underlyingValue         =Und.getUnderlyingValue();
+        dividendRate            =Und.getDividendRate();
+        impliedVol              =Und.getUnderlyingHistVlt();
         this.callPut            =callPut;
         this.strike             =strike;
         this.daysToExpiration   =daysToExpiration;
@@ -32,9 +29,8 @@ public class Whaley extends BlackScholesModel implements DerivativesCalc{
         
         }
     public Whaley(char tipoContrato, double underlyingValue,double underlyingHistVolatility,double dividendRate,char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue){
-        this.pModelName         ="Whaley ver2017 v2";
-        this.modelNumber        =2;
-        this.tipoEjercicio      ='A';
+        
+        
         this.tipoContrato               =tipoContrato;
         this.underlyingValue            =underlyingValue;
         this.underlyingHistVolatility   =underlyingHistVolatility;
@@ -50,6 +46,10 @@ public class Whaley extends BlackScholesModel implements DerivativesCalc{
     
     }
      private void buildW(){
+        
+        this.pModelName         ="Whaley ver2017 v2";
+        this.modelNumber        =2;
+        this.tipoEjercicio      ='A';
         build();
     }
     
@@ -91,7 +91,7 @@ public class Whaley extends BlackScholesModel implements DerivativesCalc{
         q=(tipoContrato==STOCK) ? 0:tasa;       
         b=(tipoContrato==STOCK) ? tasa:0;
         
-        zz=Math.exp((b-tasa))*dayYear;
+       // zz=Math.exp((b-tasa))*dayYear;
         vlt2 = impliedVol*impliedVol;
         
         d1 = (Math.log(underlyingNPV / strike) + (b + vlt2 / 2)*dayYear) / (impliedVol*sqrDayYear);           
@@ -108,7 +108,7 @@ public class Whaley extends BlackScholesModel implements DerivativesCalc{
 	eex = Math.exp(-q*dayYear);
 
 	s1 = strike;
-	zz = 1 / Math.sqrt(2 * Math.PI);
+	//zz = 1 / Math.sqrt(2 * Math.PI);
 	zerror = 1;
 	do
 	{
@@ -124,7 +124,8 @@ public class Whaley extends BlackScholesModel implements DerivativesCalc{
 
 		lhs = multCallPut*(s1 - strike);
 		zerror = lhs - rhs;
-		nd1 = zz*Math.exp(-0.5*d1*d1);
+                nd1   =DistFunctions.PDF(d1); 
+		//nd1 = zz*Math.exp(-0.5*d1*d1); //standard normal prob?
 		slope = multCallPut*(1 - 1 / lambda)*xx + 1 / lambda*(eex*nd1) * 1 / VltSqrDayYear;
 		s1 = s1 - zerror / slope;
 

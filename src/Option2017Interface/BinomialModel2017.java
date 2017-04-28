@@ -19,15 +19,31 @@ public class BinomialModel2017 extends AbstractOptionClass2017 implements Deriva
     
     
     BinomialModel2017(){}
-    public BinomialModel2017(char tipoEjercicio,Underlying Und, char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue,int steps){
-                                              
-        pModelName              ="xBinomialModel ver2";
-        this.modelNumber        =3; 
+    
+    public BinomialModel2017(char tipoEjercicio,char tipoContrato, double underlyingValue,double underlyingHistVolatility,double dividendRate,char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue,int steps){
+        
         this.tipoEjercicio      =tipoEjercicio;
-        this.tipoContrato       =Und.tipoContrato;
-        this.underlyingValue    =Und.underlyingValue;
-        this.dividendRate       =Und.dividendRate;
-        this.impliedVol         =Und.underlyingHistVolatility;
+        this.tipoContrato       =tipoContrato;
+        this.underlyingValue    =underlyingValue;
+        this.dividendRate       =dividendRate;
+        this.impliedVol         =impliedVol;
+        this.callPut            =callPut;
+        this.strike             =strike;
+        this.daysToExpiration   =daysToExpiration;
+        this.tasa               =tasa;
+        this.optionMktValue     =optionMktValue;
+        this.steps              =steps;
+        
+        buildBinom();
+    
+    }
+    public BinomialModel2017(char tipoEjercicio,Underlying Und, char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue,int steps){
+        
+        this.tipoEjercicio      =tipoEjercicio;                                      
+        tipoContrato            =Und.tipoContrato;
+        underlyingValue         =Und.underlyingValue;
+        dividendRate            =Und.dividendRate;
+        this.impliedVol         =impliedVol;
         this.callPut            =callPut;
         this.strike             =strike;
         this.daysToExpiration   =daysToExpiration;
@@ -41,6 +57,9 @@ public class BinomialModel2017 extends AbstractOptionClass2017 implements Deriva
      }//end constructor BinomialModel1    
     
     private void buildBinom(){
+        pModelName              ="BinomialModel ver2017 ";
+        this.modelNumber        =3; 
+      
         build();  //build esta definida en AbstractOptionClass para no tener un override en el constructor
     }
     
@@ -66,7 +85,7 @@ public class BinomialModel2017 extends AbstractOptionClass2017 implements Deriva
         vPrices=new double[UpBound+1];
         
         //underlyingNPV=underlyingValue*Math.exp(-dividendRate*dayYear);
-        q=0;
+        
         q=(tipoContrato==STOCK) ? 0:tasa;
         
         interv = dayYear / steps;
@@ -137,7 +156,6 @@ public class BinomialModel2017 extends AbstractOptionClass2017 implements Deriva
         //No se puede calcular vega desde aca dentro pq la recursivad de llamar al mismo metodo no tiene corte.
         
         BlackScholesModel BSoption;
-        anUnderlying.setUnderlyingHistVlt(impliedVol);
         BSoption =new BlackScholesModel(anUnderlying, callPut, strike, daysToExpiration, tasa,impliedVol,0);
                                         
         vega= BSoption.getVega();
