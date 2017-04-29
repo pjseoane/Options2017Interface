@@ -83,16 +83,20 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
       // dayYear=daysToExpiration/365;
       // sqrDayYear = Math.sqrt(dayYear);
        dayYear=daysToExpiration/365;
-            sqrDayYear = Math.sqrt(dayYear);
-      
+       sqrDayYear = Math.sqrt(dayYear);
+       
+       
+       underlyingNPV=underlyingValue*Math.exp(-dividendRate*dayYear);
+       
        q=(tipoContrato==STOCK) ? dividendRate:tasa; 
        //q: si es una accion q es el dividendo, si es un futuro q se toma la tasa para descontar el valor futr a presente 
-      
-       z  = Math.exp(-tasa*dayYear); // e^(-r*t);
-       ww = Math.exp(-q*dayYear); // e^(-q*t)
+       //Se hace este reemplazo para poder usar la misma form en STOCK y FUTURO
        
-       d1 = (Math.log(underlyingValue / strike) + (tasa-q + (impliedVol*impliedVol) / 2)*dayYear) / (impliedVol*sqrDayYear);
-       d2 = d1 - (impliedVol*sqrDayYear);
+       z  = Math.exp(-tasa*dayYear); // e^(-r*t);
+       ww = Math.exp(-dividendRate*dayYear); // e^(-dividendRate*t) //stocks
+       
+       d1 = (Math.log(underlyingValue / strike) + dayYear*(tasa-q + impliedVol*impliedVol / 2)) / (impliedVol*sqrDayYear);
+       d2 = d1 - impliedVol*sqrDayYear;
        
        CNDFd1    =DistFunctions.CNDF(d1);  //Cumulative Normal Distribution
        CNDFd2    =DistFunctions.CNDF(d2);
@@ -100,16 +104,16 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
       
        //gamma y vega son iguales para call y put
        gamma     =PDFd1 *ww / (underlyingValue*impliedVol*sqrDayYear);
-       vega      =underlyingValue*ww * sqrDayYear*PDFd1 / 100;
+       vega      =underlyingNPV * sqrDayYear*PDFd1 / 100;
        
        switch (callPut)
             {
               
             case CALL: 
                             
-		prima = ww * underlyingValue * CNDFd1 - z * strike*CNDFd2;
+		prima = underlyingValue*Math.exp(-q*dayYear) * CNDFd1 - z * strike*CNDFd2;
 		delta = ww*CNDFd1;
-		theta   = (-(ww*underlyingValue*impliedVol*PDFd1 / (2 * sqrDayYear)) - strike*tasa*z*CNDFd2+q*ww*underlyingValue*CNDFd1) / 365;
+		theta   = (-(underlyingNPV*impliedVol*PDFd1 / (2 * sqrDayYear)) - strike*tasa*z*CNDFd2+dividendRate*underlyingNPV*CNDFd1) / 365;
 		rho   = strike*dayYear*z*CNDFd2 / 100;
 		break;
 
@@ -118,9 +122,9 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
                 CNDF_d1=DistFunctions.CNDF(-d1);
                 CNDF_d2=DistFunctions.CNDF(-d2);
                 
-		prima = -ww * underlyingValue * CNDF_d1 + z * strike*CNDF_d2;
+		prima = -underlyingValue*Math.exp(-q*dayYear) * CNDF_d1 + z * strike*CNDF_d2;
 		delta = ww*(CNDFd1 - 1);
-		theta = (-(ww *underlyingValue*impliedVol*PDFd1 / (2 * sqrDayYear)) + strike*tasa*z*CNDF_d2-q*ww*underlyingValue*CNDF_d1) / 365;
+		theta = (-(underlyingNPV*impliedVol*PDFd1 / (2 * sqrDayYear)) + strike*tasa*z*CNDF_d2-dividendRate*underlyingNPV*CNDF_d1) / 365;
                 rho = -strike*dayYear*z*CNDF_d2 / 100;
 		break;
             
