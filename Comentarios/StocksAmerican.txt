@@ -1,0 +1,316 @@
+STOCKS
+AMERICAN
+
+run:
+-----------------------Black-Scholes ver2017
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.3 Dividend Rate: 0.0-
+Strike             :54.5
+Call / Put         :C
+Prima              :4.059654105139828
+Delta              :0.5885861486352996
+Gamma              :0.0450490641658506
+Vega               :0.11200554994660113
+Theta              :-0.020679268665935606
+Rho                :0.07756872347890863
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :1-Black-Scholes ver2017strike54.5prima4.059654105139828delta0.5885861486352996gamma0.0450490641658506vega0.11200554994660113theta-0.020679268665935606rho0.07756872347890863impVlt0.3z
+Elapsed time       :98.0
+------------------------------------------------------
+-----------------------Whaley ver2017 v2
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.3 Dividend Rate: 0.0-
+Strike             :54.5
+Call / Put         :C
+Prima              :4.059654105139828
+Delta              :0.5885861486352996
+Gamma              :0.0450490641658506
+Vega               :0.11200554994660113
+Theta              :-0.020679268665935606
+Rho                :0.07756872347890863
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :2-Whaley ver2017 v2strike54.5prima4.059654105139828delta0.5885861486352996gamma0.0450490641658506vega0.11200554994660113theta-0.020679268665935606rho0.07756872347890863impVlt0.3z
+Elapsed time       :0.0
+------------------------------------------------------
+-----------------------BinomialModel ver2017 
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.0 Dividend Rate: 0.0-
+Strike             :54.5
+Call / Put         :C
+Prima              :4.0593061885891375
+Delta              :0.5886852977931402
+Gamma              :0.04498628031524018
+Vega               :0.11200554994660113
+Theta              :-0.020681007475190638
+Rho                :0.07756872347890863
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :3-BinomialModel ver2017 strike54.5prima4.0593061885891375delta0.5886852977931402gamma0.04498628031524018vega0.11200554994660113theta-0.020681007475190638rho0.07756872347890863impVlt0.3z
+Elapsed time       :147.0
+------------------------------------------------------
+-----------------------Binomial Control Variate 
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.0 Dividend Rate: 0.0-
+Strike             :54.5
+Call / Put         :C
+Prima              :4.059654105139827
+Delta              :0.5886852977931402
+Gamma              :0.04498628031524018
+Vega               :0.11200554994660113
+Theta              :-0.020681007475190638
+Rho                :0.07756872347890863
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :6-Binomial Control Variate strike54.5prima4.059654105139827delta0.5886852977931402gamma0.04498628031524018vega0.11200554994660113theta-0.020681007475190638rho0.07756872347890863impVlt0.3z
+Elapsed time       :255.0
+------------------------------------------------------
+-----------------------Explicit Finite Model by Wilmott 
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.0 Dividend Rate: 0.0-
+Strike             :54.5
+Call / Put         :C
+Prima              :4.059668921954776
+Delta              :0.5885809393058434
+Gamma              :0.045048626772726794
+Vega               :0.11200554994660113
+Theta              :-0.020679374596907704
+Rho                :0.07756872347890863
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :4-Explicit Finite Model by Wilmott strike54.5prima4.059668921954776delta0.5885809393058434gamma0.045048626772726794vega0.11200554994660113theta-0.020679374596907704rho0.07756872347890863impVlt0.3z
+Elapsed time       :479.0
+------------------------------------------------------
+BUILD SUCCESSFUL (total time: 2 seconds)
+
+
+run:
+-----------------------Black-Scholes ver2017
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.3 Dividend Rate: 0.0-
+Strike             :54.5
+Call / Put         :P
+Prima              :2.8181690227113982
+Delta              :-0.41141385136470043
+Gamma              :0.0450490641658506
+Vega               :0.11200554994660113
+Theta              :-0.013315088540240867
+Rho                :-0.06971487903498608
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :1-Black-Scholes ver2017strike54.5prima2.8181690227113982delta-0.41141385136470043gamma0.0450490641658506vega0.11200554994660113theta-0.013315088540240867rho-0.06971487903498608impVlt0.3z
+Elapsed time       :73.0
+------------------------------------------------------
+-----------------------Whaley ver2017 v2
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.3 Dividend Rate: 0.0-
+Strike             :54.5
+Call / Put         :P
+Prima              :2.869359157298413
+Delta              :-0.41141385136470043
+Gamma              :0.0450490641658506
+Vega               :0.11200554994660113
+Theta              :-0.013315088540240867
+Rho                :-0.06971487903498608
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :2-Whaley ver2017 v2strike54.5prima2.869359157298413delta-0.41141385136470043gamma0.0450490641658506vega0.11200554994660113theta-0.013315088540240867rho-0.06971487903498608impVlt0.3z
+Elapsed time       :12.0
+------------------------------------------------------
+-----------------------BinomialModel ver2017 
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.0 Dividend Rate: 0.0-
+Strike             :54.5
+Call / Put         :P
+Prima              :2.873732425886071
+Delta              :-0.42258843971869386
+Gamma              :0.04704647678723744
+Vega               :0.11200554994660113
+Theta              :-0.01399207513189893
+Rho                :-0.06971487903498608
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :3-BinomialModel ver2017 strike54.5prima2.873732425886071delta-0.42258843971869386gamma0.04704647678723744vega0.11200554994660113theta-0.01399207513189893rho-0.06971487903498608impVlt0.3z
+Elapsed time       :141.0
+------------------------------------------------------
+-----------------------Binomial Control Variate 
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.0 Dividend Rate: 0.0-
+Strike             :54.5
+Call / Put         :P
+Prima              :2.8740803424350587
+Delta              :-0.42258843971869386
+Gamma              :0.04704647678723744
+Vega               :0.11200554994660113
+Theta              :-0.01399207513189893
+Rho                :-0.06971487903498608
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :6-Binomial Control Variate strike54.5prima2.8740803424350587delta-0.42258843971869386gamma0.04704647678723744vega0.11200554994660113theta-0.01399207513189893rho-0.06971487903498608impVlt0.3z
+Elapsed time       :394.0
+------------------------------------------------------
+-----------------------Explicit Finite Model by Wilmott 
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.0 Dividend Rate: 0.0-
+Strike             :54.5
+Call / Put         :P
+Prima              :2.8738345996745203
+Delta              :-0.4226320781295172
+Gamma              :0.047108144929624396
+Vega               :0.11200554994660113
+Theta              :-0.013991155635892694
+Rho                :-0.06971487903498608
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :4-Explicit Finite Model by Wilmott strike54.5prima2.8738345996745203delta-0.4226320781295172gamma0.047108144929624396vega0.11200554994660113theta-0.013991155635892694rho-0.06971487903498608impVlt0.3z
+Elapsed time       :624.0
+------------------------------------------------------
+BUILD SUCCESSFUL (total time: 2 seconds)
+
+
+run:
+-----------------------Black-Scholes ver2017
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.3 Dividend Rate: 0.04-
+Strike             :54.5
+Call / Put         :C
+Prima              :3.714989316684708
+Delta              :0.5551252890239196
+Gamma              :0.045149743923829526
+Vega               :0.11225587016678162
+Theta              :-0.017165968040438944
+Rho                :0.07347096323186539
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :1-Black-Scholes ver2017strike54.5prima3.714989316684708delta0.5551252890239196gamma0.045149743923829526vega0.11225587016678162theta-0.017165968040438944rho0.07347096323186539impVlt0.3z
+Elapsed time       :74.0
+------------------------------------------------------
+-----------------------Whaley ver2017 v2
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.3 Dividend Rate: 0.04-
+Strike             :54.5
+Call / Put         :C
+Prima              :3.714989316684708
+Delta              :0.5551252890239196
+Gamma              :0.045149743923829526
+Vega               :0.11225587016678162
+Theta              :-0.017165968040438944
+Rho                :0.07347096323186539
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :2-Whaley ver2017 v2strike54.5prima3.714989316684708delta0.5551252890239196gamma0.045149743923829526vega0.11225587016678162theta-0.017165968040438944rho0.07347096323186539impVlt0.3z
+Elapsed time       :0.0
+------------------------------------------------------
+-----------------------BinomialModel ver2017 
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.0 Dividend Rate: 0.04-
+Strike             :54.5
+Call / Put         :C
+Prima              :3.715150548246035
+Delta              :0.561418363293343
+Gamma              :0.04607805939991767
+Vega               :0.11225587016678162
+Theta              :-0.020511055215664542
+Rho                :0.07347096323186539
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :3-BinomialModel ver2017 strike54.5prima3.715150548246035delta0.561418363293343gamma0.04607805939991767vega0.11225587016678162theta-0.020511055215664542rho0.07347096323186539impVlt0.3z
+Elapsed time       :147.0
+------------------------------------------------------
+-----------------------Binomial Control Variate 
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.0 Dividend Rate: 0.04-
+Strike             :54.5
+Call / Put         :C
+Prima              :3.7149893166847074
+Delta              :0.561418363293343
+Gamma              :0.04607805939991767
+Vega               :0.11225587016678162
+Theta              :-0.020511055215664542
+Rho                :0.07347096323186539
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :6-Binomial Control Variate strike54.5prima3.7149893166847074delta0.561418363293343gamma0.04607805939991767vega0.11225587016678162theta-0.020511055215664542rho0.07347096323186539impVlt0.3z
+Elapsed time       :281.0
+------------------------------------------------------
+-----------------------Explicit Finite Model by Wilmott 
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.0 Dividend Rate: 0.04-
+Strike             :54.5
+Call / Put         :C
+Prima              :3.7149603251988887
+Delta              :0.5612392962265007
+Gamma              :0.04615027070626888
+Vega               :0.11196010407771707
+Theta              :-0.020512258370630625
+Rho                :0.06937403405790182
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :4-Explicit Finite Model by Wilmott strike54.5prima3.7149603251988887delta0.5612392962265007gamma0.04615027070626888vega0.11196010407771707theta-0.020512258370630625rho0.06937403405790182impVlt0.3z
+Elapsed time       :429.0
+------------------------------------------------------
+BUILD SUCCESSFUL (total time: 2 seconds)
+run:
+-----------------------Black-Scholes ver2017
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.3 Dividend Rate: 0.04-
+Strike             :54.5
+Call / Put         :P
+Prima              :3.072953308469028
+Delta              :-0.4339756368994851
+Gamma              :0.045149743923829526
+Vega               :0.11225587016678162
+Theta              :-0.015763492125789386
+Rho                :-0.07381263928202933
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :1-Black-Scholes ver2017strike54.5prima3.072953308469028delta-0.4339756368994851gamma0.045149743923829526vega0.11225587016678162theta-0.015763492125789386rho-0.07381263928202933impVlt0.3z
+Elapsed time       :147.0
+------------------------------------------------------
+-----------------------Whaley ver2017 v2
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.3 Dividend Rate: 0.04-
+Strike             :54.5
+Call / Put         :P
+Prima              :3.1295071701806076
+Delta              :-0.4339756368994851
+Gamma              :0.045149743923829526
+Vega               :0.11225587016678162
+Theta              :-0.015763492125789386
+Rho                :-0.07381263928202933
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :2-Whaley ver2017 v2strike54.5prima3.1295071701806076delta-0.4339756368994851gamma0.045149743923829526vega0.11225587016678162theta-0.015763492125789386rho-0.07381263928202933impVlt0.3z
+Elapsed time       :24.0
+------------------------------------------------------
+-----------------------BinomialModel ver2017 
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.0 Dividend Rate: 0.04-
+Strike             :54.5
+Call / Put         :P
+Prima              :3.136057005327186
+Delta              :-0.4511444172192466
+Gamma              :0.04834498554982134
+Vega               :0.11225587016678162
+Theta              :-0.01387128622976075
+Rho                :-0.07381263928202933
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :3-BinomialModel ver2017 strike54.5prima3.136057005327186delta-0.4511444172192466gamma0.04834498554982134vega0.11225587016678162theta-0.01387128622976075rho-0.07381263928202933impVlt0.3z
+Elapsed time       :188.0
+------------------------------------------------------
+-----------------------Binomial Control Variate 
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.0 Dividend Rate: 0.04-
+Strike             :54.5
+Call / Put         :P
+Prima              :3.1358957737641697
+Delta              :-0.4511444172192466
+Gamma              :0.04834498554982134
+Vega               :0.11225587016678162
+Theta              :-0.01387128622976075
+Rho                :-0.07381263928202933
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :6-Binomial Control Variate strike54.5prima3.1358957737641697delta-0.4511444172192466gamma0.04834498554982134vega0.11225587016678162theta-0.01387128622976075rho-0.07381263928202933impVlt0.3z
+Elapsed time       :299.0
+------------------------------------------------------
+-----------------------Explicit Finite Model by Wilmott 
+Underlying String  :Tipo Contrato S Value: 55.0 Historical Vlt: 0.0 Dividend Rate: 0.04-
+Strike             :54.5
+Call / Put         :P
+Prima              :3.1356763113745054
+Delta              :-0.45126926822065294
+Gamma              :0.048416937321009906
+Vega               :0.11196010407771707
+Theta              :-0.013873269391513284
+Rho                :-0.0779095684559929
+Option Mkt Value   :0.0
+Implied Vol        :0.3
+OptionString       :4-Explicit Finite Model by Wilmott strike54.5prima3.1356763113745054delta-0.45126926822065294gamma0.048416937321009906vega0.11196010407771707theta-0.013873269391513284rho-0.0779095684559929impVlt0.3z
+Elapsed time       :479.0
+------------------------------------------------------
+BUILD SUCCESSFUL (total time: 2 seconds)
+

@@ -45,7 +45,6 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     //protected int multiplicador;
     protected int multCallPut;
    
-    //public AbstractOptionClass2017(){};
     
     public void build(){
         modelCounter++;
@@ -54,6 +53,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
         //tieneVida=(daysToExpiration>0);
         
         if (daysToExpiration>0){
+            /*
            dayYear=daysToExpiration/365;
            sqrDayYear = Math.sqrt(dayYear);
            
@@ -62,6 +62,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
            }else{
              underlyingNPV=underlyingValue  ;
            }
+            */
             runModel(); 
                 //A continuacion se recalcula la opcion si esta vieen con un valor de mercado 
                 //si el valor de mercado es cero se calcula con la vlt historica, sino se calcula 
@@ -131,6 +132,8 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     builder.append(modelNumber);
     builder.append("-");
     builder.append(pModelName);
+    builder.append("strike");
+    builder.append(strike);
     builder.append("prima");
     builder.append(prima);
     builder.append("delta");

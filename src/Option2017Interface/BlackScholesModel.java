@@ -85,7 +85,6 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
        dayYear=daysToExpiration/365;
        sqrDayYear = Math.sqrt(dayYear);
        
-       
        underlyingNPV=underlyingValue*Math.exp(-dividendRate*dayYear);
        
        q=(tipoContrato==STOCK) ? dividendRate:tasa; 
@@ -134,9 +133,6 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
                 
         }//end switch
     }//end runModel()
-    
-    
-   
     
     
 }//end BlackScholesModel
