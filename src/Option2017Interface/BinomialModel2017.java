@@ -122,11 +122,10 @@ public class BinomialModel2017 extends AbstractOptionClass2017 implements Deriva
         
         for (int i = 1; i <= (UpBound - 8); i++){
             
-        //    System.out.println("---Start TimeStep: "+i);
+            //System.out.println("---Start TimeStep: "+i);
             //el proceso sig puede hacerse multithreading ?
             arrayProcess(UpBound-i);
-            
-	}
+        }
         vtheta = vPrices[4];
 
 	//Continua loop hasta nivel -4 para tomar valores para gamma
@@ -156,10 +155,12 @@ public class BinomialModel2017 extends AbstractOptionClass2017 implements Deriva
         //Hay que ver vega pq se usa para Implied V.
         //No se puede calcular vega desde aca dentro pq la recursivad de llamar al mismo metodo no tiene corte.
         
-        BlackScholesModel BSoption;
-        BSoption =new BlackScholesModel(anUnderlying, callPut, strike, daysToExpiration, tasa,impliedVol,0);
-        vega= BSoption.getVega();
-        rho = BSoption.getRho();
+        BlackScholesModel BSOption;
+        BSOption =new  BlackScholesModel(anUnderlying, callPut, strike, daysToExpiration, tasa,impliedVol,0);
+                
+        //el problema de tomar vega del BS es que no es suficiente mente exacto y genera muchas iteraciones para converger
+        vega= BSOption.getVega();
+        rho = BSOption.getRho();
         
     }//end CalculateDerivatives Binomial
  
@@ -174,5 +175,8 @@ public class BinomialModel2017 extends AbstractOptionClass2017 implements Deriva
     }  
           
 }
+   
     
+   
+
 }

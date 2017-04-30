@@ -14,18 +14,20 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
      //protected BlackScholesModel BSOption;
      
     WhaleyV2(){}
-    public WhaleyV2(Underlying Und,char callPut,double strike,double daysToExpiration,double tasa,double mktPrime){
+    public WhaleyV2(Underlying und,char callPut,double strike,double daysToExpiration,double tasa,double impliedVol,double mktPrime){
                 
-        tipoContrato            =Und.getTipoContrato();
-        underlyingValue         =Und.getUnderlyingValue();
-        dividendRate            =Und.getDividendRate();
-        impliedVol              =Und.getUnderlyingHistVlt();
-        this.callPut            =callPut;
-        this.strike             =strike;
-        this.daysToExpiration   =daysToExpiration;
-        this.tasa               =tasa;
-        this.optionMktValue     =mktPrime;
-        this.anUnderlying       =Und;
+        tipoContrato                    =und.tipoContrato;
+        underlyingValue                 =und.underlyingValue;
+        underlyingHistVolatility        =und.underlyingHistVolatility;
+        dividendRate                    =und.dividendRate;
+        this.callPut                    =callPut;
+        this.strike                     =strike;
+        this.daysToExpiration           =daysToExpiration;
+        this.tasa                       =tasa;
+        this.impliedVol                 =impliedVol;
+        this.optionMktValue             =optionMktValue;
+        this.anUnderlying               =und;
+        
         buildW();
         
         }

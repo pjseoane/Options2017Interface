@@ -53,18 +53,9 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
         //tieneVida=(daysToExpiration>0);
         
         if (daysToExpiration>0){
-            /*
-           dayYear=daysToExpiration/365;
-           sqrDayYear = Math.sqrt(dayYear);
            
-           if(tipoContrato==STOCK){
-            underlyingNPV=underlyingValue*Math.exp(-dividendRate*dayYear);
-           }else{
-             underlyingNPV=underlyingValue  ;
-           }
-            */
             runModel(); 
-                //A continuacion se recalcula la opcion si esta vieen con un valor de mercado 
+                //A continuacion se recalcula la opcion si esta viene con un valor de mercado 
                 //si el valor de mercado es cero se calcula con la vlt historica, sino se calcula 
                 //la implicita y queda recalculada toda la opcion y sus greeks.
             CalcImpliedVlt();
@@ -154,7 +145,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     
     //getters model
     public double getModelNumber(){return modelNumber;}
-    public String getModelName(){return pModelName;}
+    @Override public String getModelName(){return pModelName;}
     public double getElapsedTime(){return elapsedTime;}
     
     
@@ -165,7 +156,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     void setDaysToExpiration(double daysToExpiration){this.daysToExpiration=daysToExpiration;}
     void setOptionVlt(double vlt){this.impliedVol=vlt;}
    
-    
+    @Override
     public void CalcImpliedVlt(){
         
         /*Anda ok el tema es que deja seteada a la opcion con la imp vlt y todos los valores
@@ -182,11 +173,11 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
         El recursivo no
         */    
         int contador=0;
-        double dif=1;
-        double Accuracy=0.000001;
-        dif=optionMktValue-prima;      
         
-        while(Math.abs(dif) > Accuracy && contador <20 && vega>0.000001 && optionMktValue>0 && impliedVol>0.005){
+        double Accuracy=0.00001;
+        double dif=optionMktValue-prima;      
+        
+        while(Math.abs(dif) > Accuracy && contador <120 && vega>0.000001 && optionMktValue>0 && impliedVol>0.005){
             
                 //Asignamos la nueva vlt calculada a la opcion en cuestion y la recalculamos
                 //Utiliza el modelo correspondiente a esa opcion
@@ -198,5 +189,36 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
         }
         //impliedVol=contador;
     }
+     //el metodo siguiente es biseccion 
+    
+    public void CalcImpliedVltBiseccion(){
+        //No se esta usando se le puede cambiar el nombre y que pase a ser el metodo activo
+        int contador=0;
+        
+        double Accuracy=0.00001;
+        double dif=optionMktValue-prima;      
+        double volMin=0.01;
+        double volMax=impliedVol*2;
+        
+        while(Math.abs(dif) > Accuracy && contador <20 && optionMktValue>0 && impliedVol>=0.01 && Math.abs(volMin-volMax)>0.0001){
+            if (dif>0) {
+                //la vol debe subir, la anterior es la nueva minima
+                //la max no se toca.
+                volMin=impliedVol;
+            }else{
+                //la vol debe bajar, la anterior es la nueva maxima
+                //la min no se toca.
+                volMax=impliedVol;
+            }
+            impliedVol=(volMax+volMin)/2;
+            runModel();
+            dif=optionMktValue-prima;
+            contador++;
+        }
+        //impliedVol=contador;
+        
+    
+    }
+
     
 }//end class
