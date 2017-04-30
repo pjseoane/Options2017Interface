@@ -182,7 +182,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
         El recursivo no
         */    
         int contador=0;
-        double dif;
+        double dif=1;
         double Accuracy=0.000001;
         dif=optionMktValue-prima;      
         
@@ -196,6 +196,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
                 dif=optionMktValue-prima;
                 contador++;
         }
+        //impliedVol=contador;
     }
     
 }//end class

@@ -57,28 +57,26 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
     @Override
     public void runModel(){
         
-        BlackScholesModel BSOption=new BlackScholesModel(tipoContrato, underlyingValue,underlyingHistVolatility, dividendRate, callPut, strike, daysToExpiration, tasa, impliedVol, optionMktValue);
+        BlackScholesModel BSOption=new BlackScholesModel(tipoContrato, underlyingValue,underlyingHistVolatility, dividendRate, callPut, strike, daysToExpiration, tasa, impliedVol, 0);
         prima=BSOption.getPrima();
         
         if(tipoContrato=='F' || callPut=='P') {
             wWhaley();
-        }else{
-            prima=BSOption.getPrima();
         }
         
         //greeks se devuelven de BScholes
-        delta = BSOption.getDelta();
-	gamma = BSOption.getGamma();
-	vega = BSOption.getVega();
-	theta = BSOption.getTheta();
-	rho = BSOption.getRho();
+        delta   = BSOption.getDelta();
+	gamma   = BSOption.getGamma();
+	vega    = BSOption.getVega();
+	theta   = BSOption.getTheta();
+	rho     = BSOption.getRho();
     }
     
     private void wWhaley(){
         double zz;
         dayYear=daysToExpiration/365;
         sqrDayYear = Math.sqrt(dayYear);
-       
+        underlyingNPV=underlyingValue*Math.exp(-dividendRate*dayYear);
         
          switch(tipoContrato){
           case STOCK:
@@ -97,9 +95,8 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
         
         d1 = (Math.log(underlyingValue / strike) + ((tasa-q) + vlt2 / 2)*dayYear) / (impliedVol*sqrDayYear);
         d2 = d1 - (impliedVol*sqrDayYear);
-        
-        
-	VltSqrDayYear = impliedVol*sqrDayYear;
+       
+        VltSqrDayYear = impliedVol*sqrDayYear;
 	h = 1 - Math.exp(-tasa*dayYear); //descuento para valor presente
 	alfa = 2 * tasa / vlt2;
 	beta = 2 * (b-q) / vlt2;
@@ -141,8 +138,6 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
 		        prima = underlyingValue - strike;
 		}else{
 		        
-                        //Underlying Und2=new Underlying(tipoContrato,underlyingValue,impliedVol,dividendRate);
-                        //BlackScholesModel option=new BlackScholesModel(Und2, 'C', strike, daysToExpiration, tasa,impliedVol,0);
                         prima += a*Math.pow((underlyingValue / s1), lambda);;
                 }
 		break;
@@ -153,15 +148,14 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
 			
                         prima = strike - underlyingValue;
 		}else{
-                       // Underlying Und2=new Underlying(tipoContrato,underlyingValue,impliedVol,dividendRate);
-                       // BlackScholesModel option=new BlackScholesModel(Und2, 'P', strike, daysToExpiration, tasa,impliedVol,0);
-			 prima += a*Math.pow((underlyingValue / s1), lambda);   
+                	prima += a*Math.pow((underlyingValue / s1), lambda);   
                         
                 }
 		break;
 	}
+        
        
-	//return vv;
+       
 	
     }
     

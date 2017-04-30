@@ -77,7 +77,8 @@ public class EFWilmott2017 extends BinomialModel2017 implements DerivativesCalc 
         
         // ***** ver futuros put , genra un underlying mas bajo y por ende un put mas alto
         
-        //underlyingNPV=underlyingValue*Math.exp(-dividendRate*dayYear);
+        dayYear=daysToExpiration/365;
+        underlyingNPV=underlyingValue*Math.exp(-dividendRate*dayYear);
         
         q=(tipoContrato==STOCK) ? 0:tasa;
         underlyingNPV=underlyingNPV*(Math.exp(-q*dayYear));
@@ -185,7 +186,7 @@ public class EFWilmott2017 extends BinomialModel2017 implements DerivativesCalc 
         //Hay que ver vega pq se usa para Implied V.
         //No se puede caclcular vega desde aca dentro pq la recursivad de llamar al mismo metodo no tiene corte.
         
-        anUnderlying.setUnderlyingValue(underlyingNPV);
+       // anUnderlying.setUnderlyingValue(underlyingNPV);
         BlackScholesModel BSoption;
         BSoption =new BlackScholesModel(anUnderlying, callPut, strike, daysToExpiration, tasa,impliedVol,0);
                                         

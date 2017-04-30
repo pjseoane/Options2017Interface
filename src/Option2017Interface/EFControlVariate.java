@@ -9,7 +9,7 @@ package Option2017Interface;
  *
  * @author paulino.seoane branch 1?
  */
-public class EFControlVariate extends EFWilmott2016{
+public class EFControlVariate extends EFWilmott2017 implements DerivativesCalc{
 /*
 Solo Para American
 Modelo Con tecnica de estabilizacioon Control Variate
@@ -17,45 +17,71 @@ EF american+bseuropean-EF european.
 Hull pag 333 y 351
 
 */
-public EFControlVariate(Underlying Und,char callPut,double strike,double daysToExpiration,double tasa,double mktPrime,int steps){
+public EFControlVariate(double underlyingValue,double underlyingHistVolatility,double dividendRate,char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue,int steps){
         
-        pModelName="Exp Finite Control Variate";
-        
-        this.ModelNumber        =7; 
-        this.tipoEjercicio      ='A';
-        this.tipoContrato       =Und.getTipoContrato();
-        this.underlyingValue    =Und.getUnderlyingValue();
-        this.dividendRate       =Und.getDividendRate();
-        this.optionVlt          =Und.getUnderlyingVolatility();
+        this.underlyingValue    =underlyingValue;
+        this.dividendRate       =dividendRate;
+        this.impliedVol         =impliedVol;
         this.callPut            =callPut;
         this.strike             =strike;
         this.daysToExpiration   =daysToExpiration;
         this.tasa               =tasa;
-        this.MktPrime           =mktPrime;
-        this.Und                =Und;
+        this.optionMktValue     =optionMktValue;
         this.steps              =steps;
         
-        build();
-    }//end constructor EF Control Variate
-    
-    
-    @Override
-    public void RunModel(){
-        AbstractOption EFAmerican,BSopt,EFEurop;
-        
-        EFAmerican=new EFWilmott2016('A',Und, callPut, strike, daysToExpiration, tasa,0,steps);
-        BSopt=new BlackScholes(Und, callPut, strike, daysToExpiration, tasa,0);
-        EFEurop=new EFWilmott2016('E',Und, callPut, strike, daysToExpiration, tasa,0,steps);
-        
-        prima=EFAmerican.getPrima()+BSopt.getPrima()-EFEurop.getPrima();
-        delta=EFAmerican.getDelta();
-        gamma=EFAmerican.getGamma();
-        vega=EFAmerican.getVega();
-        theta=EFAmerican.getTheta();
-        rho=EFAmerican.getRho();
+        buildEFCV();
     
     }
-}//end Class BinomialControlVariate
+    public EFControlVariate(Underlying Und, char callPut, double strike, double daysToExpiration, double tasa, double impliedVol, double optionMktValue,int steps){
+                                
+       
+        tipoContrato            =Und.getTipoContrato();
+        underlyingValue         =Und.getUnderlyingValue();
+        dividendRate            =Und.getDividendRate();
+        this.impliedVol         =impliedVol;
+        this.callPut            =callPut;
+        this.strike             =strike;
+        this.daysToExpiration   =daysToExpiration;
+        this.tasa               =tasa;
+        this.optionMktValue     =optionMktValue;
+        anUnderlying            =Und;
+        this.steps              =steps;
+        
+        buildEFCV();
+    }//end constructor BinomialModel1    
+    
+    private void buildEFCV(){
+         
+        pModelName="Explicit Finite Control Variate ";
+        modelNumber        =6; 
+        tipoEjercicio      ='A';
+        
+        build();  //build esta definida en AbstractOptionClass para no tener un override en el constructor
+    }
+    
+    @Override
+    public void runModel(){
+        
+        EFWilmott2017       EFAmericanOpt;
+        BlackScholesModel   BSOption;
+        EFWilmott2017       EFEuropeanOpt;
+        
+        EFAmericanOpt       =new EFWilmott2017('A',anUnderlying, callPut, strike, daysToExpiration, tasa,impliedVol,0,steps);
+        BSOption            =new BlackScholesModel (anUnderlying, callPut, strike, daysToExpiration, tasa,impliedVol,0);
+        EFEuropeanOpt       =new EFWilmott2017('E',anUnderlying, callPut, strike, daysToExpiration, tasa,impliedVol,0,steps);
+        
+        prima               =EFAmericanOpt.getPrima()+BSOption.getPrima()-EFEuropeanOpt.getPrima();
+        delta               =EFAmericanOpt.getDelta();
+        gamma               =EFAmericanOpt.getGamma();
+        vega                =EFAmericanOpt.getVega();
+        theta               =EFAmericanOpt.getTheta();
+        rho                 =EFAmericanOpt.getRho();
+    
+    }
+    
+    
+    
+}//end Class EFControlVariate
 
 
 

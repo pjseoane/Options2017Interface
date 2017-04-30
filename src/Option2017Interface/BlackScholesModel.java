@@ -12,6 +12,8 @@ package Option2017Interface;
 /**
  *
  * @author Paulino
+ * Este modelo anda OK chequeado.abril /2017
+ * Para chequear http://www.fintools.com/resources/online-calculators/options-calcs/binomial/
  */
 public class BlackScholesModel extends AbstractOptionClass2017 implements DerivativesCalc{
     
@@ -79,12 +81,9 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
     }
     
     @Override public void runModel(){
-      //heredadas:  
-      // dayYear=daysToExpiration/365;
-      // sqrDayYear = Math.sqrt(dayYear);
+      
        dayYear=daysToExpiration/365;
        sqrDayYear = Math.sqrt(dayYear);
-       
        underlyingNPV=underlyingValue*Math.exp(-dividendRate*dayYear);
        
        q=(tipoContrato==STOCK) ? dividendRate:tasa; 

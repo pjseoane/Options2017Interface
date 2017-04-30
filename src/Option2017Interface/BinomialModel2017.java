@@ -80,11 +80,12 @@ public class BinomialModel2017 extends AbstractOptionClass2017 implements Deriva
     
         if (steps <= 9) {steps = 10;}
         if (steps > 50000){steps = 50000;}
+        steps=((int)(steps/2)+1)*2; //para que steps sea par
         UpBound = (steps + 4);
        
         vPrices=new double[UpBound+1];
-        
-        //underlyingNPV=underlyingValue*Math.exp(-dividendRate*dayYear);
+        dayYear=daysToExpiration/365;
+        underlyingNPV=underlyingValue*Math.exp(-dividendRate*dayYear);
         
         q=(tipoContrato==STOCK) ? 0:tasa;
         
@@ -157,7 +158,6 @@ public class BinomialModel2017 extends AbstractOptionClass2017 implements Deriva
         
         BlackScholesModel BSoption;
         BSoption =new BlackScholesModel(anUnderlying, callPut, strike, daysToExpiration, tasa,impliedVol,0);
-                                        
         vega= BSoption.getVega();
         rho = BSoption.getRho();
         
