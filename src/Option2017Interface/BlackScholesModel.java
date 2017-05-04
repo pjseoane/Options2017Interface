@@ -20,7 +20,7 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
     protected double z,ww,d1,d2,CNDFd1,CNDFd2,PDFd1,CNDF_d1,CNDF_d2;
         
     //Constructors
-    protected BlackScholesModel(){};
+    public BlackScholesModel(){}
     public BlackScholesModel(Underlying und, char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue){
        
         tipoContrato                    =und.tipoContrato;

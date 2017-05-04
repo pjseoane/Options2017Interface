@@ -25,7 +25,7 @@ public class EFWilmott2017 extends BinomialModel2017 implements DerivativesCalc 
     private double deltaUp, deltaDn;
     private double gammaUp, gammaDn;
     
-    EFWilmott2017(){};
+    public EFWilmott2017(){};
     public EFWilmott2017(char tipoEjercicio,char tipoContrato, double underlyingValue,double underlyingHistVolatility,double dividendRate,char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue,int steps){
         
         this.tipoEjercicio      =tipoEjercicio;

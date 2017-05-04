@@ -17,7 +17,10 @@ EF american+bseuropean-EF european.
 Hull pag 333 y 351
 
 */
-public EFControlVariate(double underlyingValue,double underlyingHistVolatility,double dividendRate,char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue,int steps){
+   
+    public EFControlVariate(){}
+   
+    public EFControlVariate(double underlyingValue,double underlyingHistVolatility,double dividendRate,char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue,int steps){
         
         this.underlyingValue    =underlyingValue;
         this.dividendRate       =dividendRate;

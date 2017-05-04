@@ -18,7 +18,7 @@ public class BinomialModel2017 extends AbstractOptionClass2017 implements Deriva
     protected int steps,mult;
     
     
-    BinomialModel2017(){}
+    public BinomialModel2017(){}
     
     public BinomialModel2017(char tipoEjercicio,char tipoContrato, double underlyingValue,double underlyingHistVolatility,double dividendRate,char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue,int steps){
         

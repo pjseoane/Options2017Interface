@@ -45,6 +45,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     //protected int multiplicador;
     protected int multCallPut;
    
+    public AbstractOptionClass2017(){}
     
     public void build(){
         modelCounter++;

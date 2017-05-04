@@ -13,7 +13,7 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
      private double b,vlt2,VltSqrDayYear,h,alfa,beta,lambda,eex,s1,zerror,xx,corr,mBlackScholes,rhs,lhs,nd1,slope,a,vv;
      //protected BlackScholesModel BSOption;
      
-    WhaleyV2(){}
+    public WhaleyV2(){}
     public WhaleyV2(Underlying und,char callPut,double strike,double daysToExpiration,double tasa,double impliedVol,double mktPrime){
                 
         tipoContrato                    =und.tipoContrato;
@@ -155,10 +155,6 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
                 }
 		break;
 	}
-        
-       
-       
-	
     }
     
 }//end class

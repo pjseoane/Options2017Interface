@@ -16,6 +16,7 @@ Modelo Con tecnica de estabilizacioon Control Variate
 binomial american+bseuropean-binomialeuropean.
 Hull pag 333 y 351
 */
+    public BinomialControlVariate(){}
     public BinomialControlVariate(double underlyingValue,double underlyingHistVolatility,double dividendRate,char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue,int steps){
         
         this.underlyingValue    =underlyingValue;

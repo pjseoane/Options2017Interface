@@ -23,7 +23,7 @@ public class EFHull2017 extends BinomialModel2017 implements DerivativesCalc{
     private double[] cHull;
     
     
-    EFHull2017(){};
+    public EFHull2017(){};
     public EFHull2017(char tipoEjercicio,Underlying Und, char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue,int steps){
                                               
         
