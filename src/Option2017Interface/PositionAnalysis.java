@@ -9,14 +9,16 @@ package Option2017Interface;
  *
  * @author Paulino
  */
-public class BookPositionAnalysis {
-    protected double[] PLArray;
+public class PositionAnalysis {
+    protected double[][] PLArray;
     protected double coef,underlyingHistVlt,precioMin,precioMax,underlyingValue,desvStd;
     protected double ratioLog,lotPrice,lots,lotSize;
-    protected int daysProjected;
+    protected double daysProjected;
+    protected double optionLifeScenario;
     protected AbstractOptionClass2017 option;
     
-    public BookPositionAnalysis(AbstractOptionClass2017 option, double lots,double lotSize, double lotPrice,int daysUntilFirstExpiration,int daysProjected, double desvStd){
+    public PositionAnalysis(){}
+    public PositionAnalysis(AbstractOptionClass2017 option, double lots,double lotSize, double lotPrice,int daysUntilFirstExpiration,int daysProjected, double desvStd){
     
         
     this.lots                       =lots;
@@ -27,23 +29,22 @@ public class BookPositionAnalysis {
     this.underlyingValue            =option.getUnderlyingValue();
     this.underlyingHistVlt          =option.getUnderlyingHistVlt();
     this.daysProjected              =daysProjected;
+    this.optionLifeScenario         =daysUntilFirstExpiration;
     }
-    double[] PLArray(){
-       PLArray=new double[61];
-       coef                         =Math.sqrt(daysProjected/365)*underlyingValue;
+    public double[][] PLArray(){
+       PLArray=new double[2][61];
+       coef                         =Math.sqrt(daysProjected/365)*underlyingHistVlt;
        precioMin                    =underlyingValue*Math.exp(coef*-desvStd);
-       precioMax                    =underlyingValue*Math.exp(coef*-desvStd);
+       precioMax                    =underlyingValue*Math.exp(coef*desvStd);
        ratioLog                     =Math.exp(Math.log(precioMax/precioMin)/60);
        
         for (int i=0; i<61;i++) {
                       //Aca va todo el calculo del P & L
-                      
-                    Underlying Und=new Underlying(option.tipoContrato,precioMin*Math.pow(ratioLog,i),underlyingHistVlt,option.dividendRate);
-                    WhaleyV2 Option=new WhaleyV2(Und,option.callPut,option.strike,daysProjected,option.tasa,underlyingHistVlt,0);
-                    PLArray[i]=(Option.getPrima()-lotPrice)*lots*lotSize;
+                    PLArray[0][i]=  precioMin*Math.pow(ratioLog,i);
+                    Underlying Und=new Underlying(option.tipoContrato,PLArray[0][i],underlyingHistVlt,option.dividendRate);
+                    WhaleyV2 Option=new WhaleyV2(Und,option.callPut,option.strike,optionLifeScenario,option.tasa,underlyingHistVlt,0);
+                    PLArray[1][i]=(Option.getPrima()-lotPrice)*lots*lotSize;
                  }
-       
-       
-     return PLArray;
+    return PLArray;
     }
 }

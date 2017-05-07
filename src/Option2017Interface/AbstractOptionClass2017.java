@@ -97,6 +97,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     //otros methods: getters
     
     //Getters Opcion
+    public Underlying getUnderlying(){return anUnderlying;}
     public double getPrima(){return prima;}
     public double getDelta(){return delta;}
     public double getGamma(){return gamma;}
