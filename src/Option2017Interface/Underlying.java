@@ -30,6 +30,7 @@ public class Underlying {
         this.underlyingValue            =und.underlyingValue;
         this.underlyingHistVolatility   =und.underlyingHistVolatility;
         this.dividendRate               =und.dividendRate;
+        this.ticker                     =und.ticker;
     }
     public Underlying(char tipoContrato, double underlyingValue,double underlyingHistVolatility,double dividendRate)
     {
@@ -37,21 +38,37 @@ public class Underlying {
         this.underlyingValue            =underlyingValue;
         this.underlyingHistVolatility   =underlyingHistVolatility;
         this.dividendRate               =dividendRate;
+        ticker                          ="******";
+    }
+    
+    public Underlying(String ticker,char tipoContrato, double underlyingValue,double underlyingHistVolatility,double dividendRate){
+        this.ticker                     =ticker;
+        this.tipoContrato               =tipoContrato;
+        this.underlyingValue            =underlyingValue;
+        this.underlyingHistVolatility   =underlyingHistVolatility;
+        this.dividendRate               =dividendRate;
+        
     }
     public char getTipoContrato(){return tipoContrato;}
     public double getUnderlyingValue(){return underlyingValue;}
     public double getUnderlyingHistVlt(){return underlyingHistVolatility;}
     public double getDividendRate(){return dividendRate;}
+    public String getTicker(){return ticker;}
+    
     //setters
     public void setTipoContrato(char TipoContrato){this.tipoContrato=TipoContrato;}
     public void setUnderlyingValue(double UnderlyingValue){underlyingValue=UnderlyingValue;}
     public void setUnderlyingHistVlt(double Volatility){underlyingHistVolatility=Volatility;}
     public void setDividendRate(double DividendRate){this.dividendRate=DividendRate;}
-    //getters
+    public void setTicker(String ticker){this.ticker =ticker;}
+    
+//getters
     
     public String getUnderlyingString(){
     StringBuilder builder =new StringBuilder();
-    builder.append("Tipo Contrato ");
+    builder.append("Ticker ");
+    builder.append(ticker);
+    builder.append(" Tipo Contrato ");
     builder.append(tipoContrato);
     builder.append(" Value: ");
     builder.append(underlyingValue);

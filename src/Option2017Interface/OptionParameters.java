@@ -42,10 +42,11 @@ public class OptionParameters extends Underlying{
     }
     public OptionParameters(Underlying und,char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue)
     {
-        this.tipoContrato                =und.tipoContrato;
-        this.underlyingValue             =und.underlyingValue;
-        this.underlyingHistVolatility    =und.underlyingHistVolatility;
-        this.dividendRate                =und.dividendRate;
+        ticker                      =und.ticker;
+        tipoContrato                =und.tipoContrato;
+        underlyingValue             =und.underlyingValue;
+        underlyingHistVolatility    =und.underlyingHistVolatility;
+        dividendRate                =und.dividendRate;
         this.callPut                =callPut;
         this.strike                 =strike;
         this.daysToExpiration       =daysToExpiration;

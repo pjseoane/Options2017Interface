@@ -22,7 +22,7 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
     //Constructors
     public BlackScholesModel(){}
     public BlackScholesModel(Underlying und, char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue){
-       
+        ticker                          =und.ticker;
         tipoContrato                    =und.tipoContrato;
         underlyingValue                 =und.underlyingValue;
         underlyingHistVolatility        =und.underlyingHistVolatility;
@@ -56,6 +56,7 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
     }
     public BlackScholesModel(char tipoContrato, double underlyingValue,double underlyingHistVolatility,double dividendRate,char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue){
        
+        //this.ticker                     =ticker;
         this.tipoContrato               =tipoContrato;
         this.underlyingValue            =underlyingValue;
         this.underlyingHistVolatility   =underlyingHistVolatility;

@@ -122,6 +122,8 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
         return DerivativesArray;}
     public String getOptionString(){
     StringBuilder builder =new StringBuilder();
+   // builder.append("Ticker-");
+   //builder.append(anUnderlying.getTicker());
     builder.append(modelNumber);
     builder.append("-");
     builder.append(pModelName);

@@ -16,6 +16,7 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
     public WhaleyV2(){}
     public WhaleyV2(Underlying und,char callPut,double strike,double daysToExpiration,double tasa,double impliedVol,double mktPrime){
                 
+        ticker                          =und.ticker;
         tipoContrato                    =und.tipoContrato;
         underlyingValue                 =und.underlyingValue;
         underlyingHistVolatility        =und.underlyingHistVolatility;
@@ -32,7 +33,6 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
         
         }
     public WhaleyV2(char tipoContrato, double underlyingValue,double underlyingHistVolatility,double dividendRate,char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue){
-        
         
         this.tipoContrato               =tipoContrato;
         this.underlyingValue            =underlyingValue;
@@ -65,7 +65,7 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
         if(tipoContrato=='F' || callPut=='P') {
             wWhaley();
         }
-        
+       
         //greeks se devuelven de BScholes
         delta   = BSOption.getDelta();
 	gamma   = BSOption.getGamma();
@@ -140,7 +140,7 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
 		        prima = underlyingValue - strike;
 		}else{
 		        
-                        prima += a*Math.pow((underlyingValue / s1), lambda);;
+                        prima += a*Math.pow((underlyingValue / s1), lambda);
                 }
 		break;
 

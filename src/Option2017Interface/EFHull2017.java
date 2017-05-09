@@ -28,6 +28,7 @@ public class EFHull2017 extends BinomialModel2017 implements DerivativesCalc{
                                               
         
         this.tipoEjercicio      =tipoEjercicio;
+        ticker                  =Und.ticker;
         tipoContrato            =Und.tipoContrato;
         underlyingValue         =Und.underlyingValue;
         dividendRate            =Und.dividendRate;

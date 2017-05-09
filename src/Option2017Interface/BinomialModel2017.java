@@ -39,7 +39,8 @@ public class BinomialModel2017 extends AbstractOptionClass2017 implements Deriva
     }
     public BinomialModel2017(char tipoEjercicio,Underlying Und, char callPut, double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue,int steps){
         
-        this.tipoEjercicio      =tipoEjercicio;                                      
+        this.tipoEjercicio      =tipoEjercicio;  
+        ticker                  =Und.ticker;
         tipoContrato            =Und.tipoContrato;
         underlyingValue         =Und.underlyingValue;
         dividendRate            =Und.dividendRate;

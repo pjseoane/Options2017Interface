@@ -34,10 +34,10 @@ Hull pag 333 y 351
     }
     public BinomialControlVariate(Underlying Und, char callPut, double strike, double daysToExpiration, double tasa, double impliedVol, double optionMktValue,int steps){
                                 
-       
-        tipoContrato            =Und.getTipoContrato();
-        underlyingValue         =Und.getUnderlyingValue();
-        dividendRate            =Und.getDividendRate();
+        ticker                  =Und.ticker;
+        tipoContrato            =Und.tipoContrato;
+        underlyingValue         =Und.underlyingValue;
+        dividendRate            =Und.dividendRate;
         this.impliedVol         =impliedVol;
         this.callPut            =callPut;
         this.strike             =strike;
