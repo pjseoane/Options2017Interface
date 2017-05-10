@@ -11,8 +11,10 @@ package Option2017Interface;
  */
 public class PositionAnalysis extends BookOfOptionsPositions{
     protected double[][] PLArray;
+    private int elements;
+            
     protected double coef,underlyingHistVlt,precioMin,precioMax,underlyingValue,desvStd;
-    protected double ratioLog;
+    protected double ratioLog,esperanza;
     protected double daysProjected,optionLifeScenario;
   
     protected AbstractOptionClass2017 option;
@@ -61,19 +63,35 @@ public class PositionAnalysis extends BookOfOptionsPositions{
     }
     
      public double[][] PLArray(){
-       PLArray=new double[2][61];
+       elements=502;
+       PLArray  =new double[2][elements];
+       
+       //La ultima posicion del arreglo se usa para almacenar el valor de Expected Value, no es P&L
+      
        coef                         =Math.sqrt(daysProjected/365)*underlyingHistVlt;
        precioMin                    =underlyingValue*Math.exp(coef*-desvStd);
        precioMax                    =underlyingValue*Math.exp(coef*desvStd);
-       ratioLog                     =Math.exp(Math.log(precioMax/precioMin)/60);
+       ratioLog                     =Math.exp(Math.log(precioMax/precioMin)/(elements-2));
        
-        for (int i=0; i<61;i++) {
-                      //Aca va todo el calculo del P & L
+                for (int i=0; i<elements-0;i++) {
+       
+                    //Aca va todo el calculo del P & L
                     PLArray[0][i]=  precioMin*Math.pow(ratioLog,i);
                     Underlying Und=new Underlying(option.tipoContrato,PLArray[0][i],underlyingHistVlt,option.dividendRate);
                     WhaleyV2 Option=new WhaleyV2(Und,option.callPut,option.strike,optionLifeScenario,option.tasa,underlyingHistVlt,0);
                     PLArray[1][i]=(Option.getPrima()-lotPrice)*multiplier;
-                 }
-    return PLArray;
+                   }
+                
+                //Calculo esperanza Matematica
+               
+                double aux2;
+                for (int i=0;i<elements-1; i++){
+                    aux2=DistFunctions.CNDF(Math.log(PLArray[0][i+1]/underlyingValue)/coef)-DistFunctions.CNDF(Math.log(PLArray[0][i]/underlyingValue)/coef);
+                    esperanza+=PLArray[1][i]*aux2;
+                }
+               
+                PLArray[1][elements-1]=esperanza; //en la ultima posicion esta el expected value
+              
+    return PLArray; //hasta n-1 devuelve precio y P&L correspondiente, en la posicion n devuelve expected value 
     }
 }
