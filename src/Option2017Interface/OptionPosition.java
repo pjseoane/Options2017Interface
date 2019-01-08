@@ -12,7 +12,7 @@ package Option2017Interface;
 
 
 
-public class BookOfOptionsPositions {
+public class OptionPosition {
     protected AbstractOptionClass2017 anOption;
     protected double lots, lotSize, lotPrice,multiplier;
     protected String optionRoot;
@@ -20,8 +20,8 @@ public class BookOfOptionsPositions {
     //armar alguna collection
     
     
-    public BookOfOptionsPositions(){}
-    public BookOfOptionsPositions(AbstractOptionClass2017 anOption, double lots,double lotSize,double lotPrice){
+    public OptionPosition(){}
+    public OptionPosition(AbstractOptionClass2017 anOption, double lots,double lotSize,double lotPrice){
     
             this.optionRoot=anOption.getTicker();
             this.anOption=anOption;

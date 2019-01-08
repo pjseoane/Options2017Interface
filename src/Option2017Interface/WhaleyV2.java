@@ -14,8 +14,8 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
      //protected BlackScholesModel BSOption;
      
     public WhaleyV2(){}
-    public WhaleyV2(Underlying und,char callPut,double strike,double daysToExpiration,double tasa,double impliedVol,double mktPrime){
-                
+    public WhaleyV2(Underlying und,char callPut,double strike,double daysToExpiration,double tasa,double impliedVol,double optionMktValue){
+                  
         ticker                          =und.ticker;
         tipoContrato                    =und.tipoContrato;
         underlyingValue                 =und.underlyingValue;
@@ -27,7 +27,7 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
         this.tasa                       =tasa;
         this.impliedVol                 =impliedVol;
         this.optionMktValue             =optionMktValue;
-        this.anUnderlying               =und;
+        //this.anUnderlying               =und;
         
         buildW();
         
@@ -135,26 +135,25 @@ public class WhaleyV2 extends BlackScholesModel implements DerivativesCalc{
 	switch (callPut)
 	{
 	case CALL: //Call
-		
-                if (underlyingValue >= s1){
-		        prima = underlyingValue - strike;
+		if (underlyingValue >= s1){
+                    //prima=underlyingValue;
+		      prima = underlyingValue - strike;
 		}else{
-		        
-                        prima += a*Math.pow((underlyingValue / s1), lambda);
+                     //   prima=s1;
+                      prima += a*Math.pow((underlyingValue / s1), lambda);
                 }
 		break;
 
 	case PUT: //Put
-		
-                if (underlyingValue <= s1){
-			
-                        prima = strike - underlyingValue;
+		if (underlyingValue <= s1){
+                       
+                         prima = strike - underlyingValue;
 		}else{
                 	prima += a*Math.pow((underlyingValue / s1), lambda);   
-                        
                 }
 		break;
 	}
+        //prima=a;
     }
     
 }//end class

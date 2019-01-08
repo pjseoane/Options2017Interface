@@ -2,20 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/paulino.seoane/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/AbstractOptionClass2017.java</file>
-            <file>file:/C:/Users/paulino.seoane/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/BinomialControlVariate.java</file>
-            <file>file:/C:/Users/paulino.seoane/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/DistFunctions.java</file>
-            <file>file:/C:/Users/paulino.seoane/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/BlackScholesModel.java</file>
-            <file>file:/C:/Users/paulino.seoane/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/EFWilmott2017.java</file>
-            <file>file:/C:/Users/paulino.seoane/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/EFControlVariate.java</file>
-            <file>file:/C:/Users/paulino.seoane/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/EFHull2017.java</file>
-            <file>file:/C:/Users/paulino.seoane/Dropbox/NetBeansProjects/Option2017Interface/test/Option2017Interface/BinomialModel2017Test.java</file>
-            <file>file:/C:/Users/paulino.seoane/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/BinomialModel2017.java</file>
-            <file>file:/C:/Users/paulino.seoane/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/PositionAnalysis.java</file>
-            <file>file:/C:/Users/paulino.seoane/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/CodeBreaker.java</file>
-            <file>file:/C:/Users/paulino.seoane/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/Underlying.java</file>
-            <file>file:/C:/Users/paulino.seoane/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/WhaleyV2.java</file>
+        <group name="Udemy">
+            <file>file:/C:/Users/pauli/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/AbstractOptionClass2017.java</file>
+            <file>file:/C:/Users/pauli/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/BinomialModel2017.java</file>
+            <file>file:/C:/Users/pauli/Dropbox/NetBeansProjects/Option2017Interface/src/Option2017Interface/BlackScholesModel.java</file>
         </group>
+        <group/>
     </open-files>
 </project-private>

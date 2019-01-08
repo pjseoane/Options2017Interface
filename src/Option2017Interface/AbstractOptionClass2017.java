@@ -60,7 +60,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
                 //si el valor de mercado es cero se calcula con la vlt historica, sino se calcula 
                 //la implicita y queda recalculada toda la opcion y sus greeks.
             CalcImpliedVlt();
-           
+           //CalcImpliedVltBiseccion();
             
         }else{
             opcionSinVida();
@@ -104,7 +104,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     public double getVega() {return vega;}
     public double getTheta(){return theta;}
     public double getRho()  {return rho;}
-    public double getImpVlt(){return impliedVol;}
+   // public double getImpVlt(){return impliedVol;}
     public double getOptionMktValue(){return optionMktValue;}
     public char getTipoEjercicio(){return tipoEjercicio;}
     public char getCallPut(){return callPut;}
@@ -159,7 +159,10 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
     void setCallPut(char callPut){this.callPut=callPut;}
     void setDaysToExpiration(double daysToExpiration){this.daysToExpiration=daysToExpiration;}
     void setOptionVlt(double vlt){this.impliedVol=vlt;}
-   
+    void setUnderlying(Underlying und){this.anUnderlying= und;}
+            
+            
+            
     @Override
     public void CalcImpliedVlt(){
         
@@ -181,7 +184,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
         double Accuracy=0.00001;
         double dif=optionMktValue-prima;      
         
-        while(Math.abs(dif) > Accuracy && contador <120 && vega>0.000001 && optionMktValue>0 && impliedVol>0.005){
+        while(Math.abs(dif) > Accuracy && contador <20 && vega>0.000001 && optionMktValue>0 && impliedVol>0.005){
             
                 //Asignamos la nueva vlt calculada a la opcion en cuestion y la recalculamos
                 //Utiliza el modelo correspondiente a esa opcion
@@ -220,9 +223,7 @@ public abstract class AbstractOptionClass2017 extends Underlying implements Deri
             contador++;
         }
         //impliedVol=contador;
-        
-    
-    }
+     }
 
     
 }//end class

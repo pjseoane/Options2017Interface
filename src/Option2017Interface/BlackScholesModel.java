@@ -104,6 +104,7 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
        //gamma y vega son iguales para call y put
        gamma     =PDFd1 *ww / (underlyingValue*impliedVol*sqrDayYear);
        vega      =underlyingNPV * sqrDayYear*PDFd1 / 100;
+     //  rho= -dayYear*prima/100;
        
        switch (callPut)
             {
@@ -113,8 +114,10 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
 		prima = underlyingValue*Math.exp(-q*dayYear) * CNDFd1 - z * strike*CNDFd2;
 		delta = ww*CNDFd1;
 		theta   = (-(underlyingNPV*impliedVol*PDFd1 / (2 * sqrDayYear)) - strike*tasa*z*CNDFd2+dividendRate*underlyingNPV*CNDFd1) / 365;
-		rho   = strike*dayYear*z*CNDFd2 / 100;
-		break;
+		//rho   = strike*dayYear*z*CNDFd2 / 100;
+                rho =   strike*dayYear*Math.exp(-(tasa-q)*dayYear)*CNDFd2 / 100;
+		
+                break;
 
             case PUT: 
                 
@@ -124,8 +127,10 @@ public class BlackScholesModel extends AbstractOptionClass2017 implements Deriva
 		prima = -underlyingValue*Math.exp(-q*dayYear) * CNDF_d1 + z * strike*CNDF_d2;
 		delta = ww*(CNDFd1 - 1);
 		theta = (-(underlyingNPV*impliedVol*PDFd1 / (2 * sqrDayYear)) + strike*tasa*z*CNDF_d2-dividendRate*underlyingNPV*CNDF_d1) / 365;
-                rho = -strike*dayYear*z*CNDF_d2 / 100;
-		break;
+                //rho = -strike*dayYear*z*CNDF_d2 / 100;
+                rho = -strike*dayYear*Math.exp(-(tasa-q)*dayYear)*CNDF_d2 / 100;
+		
+                break;
             
             default:
                 prima=delta=gamma=theta=rho=0;

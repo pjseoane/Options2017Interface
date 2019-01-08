@@ -38,7 +38,7 @@ public class Underlying {
         this.underlyingValue            =underlyingValue;
         this.underlyingHistVolatility   =underlyingHistVolatility;
         this.dividendRate               =dividendRate;
-        ticker                          ="******";
+        ticker                          ="TICKER";
     }
     
     public Underlying(String ticker,char tipoContrato, double underlyingValue,double underlyingHistVolatility,double dividendRate){
